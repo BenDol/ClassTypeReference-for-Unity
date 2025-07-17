@@ -32,6 +32,13 @@
             get => TypeNameProperty.stringValue;
             set => SetTypeNameAndAssembly(value);
         }
+        
+        public string TypeName {
+            get {
+                var value = TypeNameProperty.stringValue;
+                return value[(value.LastIndexOf(".", StringComparison.Ordinal) + 1)..].Trim();
+            }
+        }
 
         public bool SuppressLogs
         {

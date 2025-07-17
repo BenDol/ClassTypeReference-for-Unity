@@ -25,6 +25,7 @@
         private readonly Action<Type> _onTypeSelected;
 
         private bool _triggerDropdown;
+        private string _nameCache;
 
         public TypeFieldDrawer(
             SerializedTypeReference serializedTypeRef,
@@ -111,11 +112,16 @@
                 Event.current.Use();
             }
         }
+        
+        protected string NameCache
+        {
+            get { return _nameCache ??= _serializedTypeRef.TypeName; }
+        }
 
         private void DrawFieldContent(int controlID)
         {
             int indexOfComma = _serializedTypeRef.TypeNameAndAssembly.IndexOf(',');
-            string fullTypeName = indexOfComma == -1 ? string.Empty : _serializedTypeRef.TypeNameAndAssembly.Substring(0, indexOfComma);
+            string fullTypeName = indexOfComma == -1 ? string.Empty : NameCache;
             GUIContent fieldContent = GUIContentHelper.Temp(GetTypeToShow(fullTypeName, out bool typeExists));
 
             var previousColor = GUI.backgroundColor;
