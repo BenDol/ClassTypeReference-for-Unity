@@ -115,7 +115,7 @@
         
         protected string NameCache
         {
-            get { return _nameCache ??= _serializedTypeRef.TypeName; }
+            get { return _nameCache ??= _serializedTypeRef.TypeNameAndAssembly; }
         }
 
         private void DrawFieldContent(int controlID)
